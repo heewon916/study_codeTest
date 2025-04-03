@@ -13,6 +13,8 @@ for row in list(zip(*graph)):
     if '..' in ''.join(row): 
         c += 1
 print(r, c)
+
+
 # import sys 
 # input = sys.stdin.readline
 # N = int(input())
