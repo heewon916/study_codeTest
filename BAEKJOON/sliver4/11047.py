@@ -1,16 +1,16 @@
+import sys
+input = sys.stdin.readline
 N, K = map(int, input().split())
-
-arr = []
+li = []
 for _ in range(N):
-    arr.append(int(input()))
-arr.sort(reverse=True)
-ans = 0
-for val in arr:
+    li.append(int(input()))
+
+li.sort(reverse=True)
+res = 0
+for i in range(N):
     if K == 0:
         break
-    if K < val:
-        continue
-    else:
-        ans = ans + K // val
-        K = K % val
-print(ans)
+    res += K//li[i]
+    K %= li[i]
+    # print(res, K)
+print(res)
