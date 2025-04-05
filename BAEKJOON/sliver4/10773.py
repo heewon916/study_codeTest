@@ -1,11 +1,10 @@
-import sys
-K = int(sys.stdin.readline())
-stck = []
-for i in range(K):
-    n = int(sys.stdin.readline())
+K = int(input())
+stk = []
+
+for _ in range(K):
+    n = int(input())
     if n == 0:
-        if stck: stck.pop()
-        else: continue
+        if len(stk): stk.pop(-1)
     else:
-        stck.append(n)
-print(sum(stck))
+        stk.append(n)
+print(sum(stk))
