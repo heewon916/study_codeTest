@@ -1,50 +1,35 @@
 import sys
-INPUT = sys.stdin.readline
+input = sys.stdin.readline
+N = int(input())
+# 상근이가 갖고 있는 카드
+Nl = list(map(int, input().split()))
+M = int(input())
+# 확인의 기준
+Ml = list(map(int, input().split()))
 
-N = int(INPUT())
-cards = list(map(int, INPUT().split()))
-M = int(INPUT())
-given = list(map(int, INPUT().split()))
+# 이중반복문은 불가능
+#Ml을 기준으로 Nl에 있는 숫자들을 확인해야 한다.
+# 갖고 있는 카드를 오름차순으로 정렬하고
+Nl.sort()
+Ndic = {}
+# 갖고 있는 카드들을 cnt 센다.
+for n in Nl:
+    if n in Ndic: Ndic[n] += 1
+    else: Ndic[n] = 1
 
-# dic = dict.fromkeys(given)
-cards.sort()
-N_dic = {}
-for n in cards:
-    if n in N_dic:
-        N_dic[n] += 1
-    else:
-        N_dic[n] = 1
+# 이때 Ml의 각 원소에 대해서
+# Nl에 해당 원소가 있는지 이진 탐색을 수행한다.
+# 있다면 Ndic의 값을 도출하고 없다면 0을 도출한다.
 
-def binary(n):
+def binarySearch(m):
     low = 0
-    high = len(cards)-1
+    high = len(Nl)-1
     while low <= high:
         mid = (low + high) // 2
-        if cards[mid] == n:
-            return N_dic[n]
-        elif cards[mid] < n:
-            low = mid + 1
-        elif cards[mid] > n:
-            high = mid - 1
+        if Nl[mid] == m: return Ndic[m]
+        elif Nl[mid] < m: low = mid + 1
+        elif Nl[mid] > m: high = mid - 1
     return 0
 
-for m in given:
-    print(binary(m), end =' ')
-
-# for k in given:
-#     ret = binary(k)
-#     if ret:
-#         count = 0
-#         for i in range(ret, -1, -1):
-#             if cards[i] == k: count += 1
-#             else: break
-#         for i in range(ret+1, N):
-#             if cards[i] == k: count += 1
-#             else: break
-#         # dic[k] = count
-#         print(count, end=' ')
-#     else:
-#         print(0, end=' ')
-# for v in dic.values():
-#     print(v, end = ' ')
-
+for m in Ml:
+    print(binarySearch(m), end=' ')

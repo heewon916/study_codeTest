@@ -1,33 +1,25 @@
-# import sys
-# INPUT = sys.stdin.readline
-while True:
-    string = input()
-    flag = 1
-    if string == ".":
-        break
-    stk = []
-    for s in string:
-        if s in "([":
-            stk.append(s)
-        elif s == ")":
-            if stk:
-                top = stk.pop()
-                if top != "(":
-                    flag = 0
-                    break
-            else:
-                flag = 0
-                break
-        elif s == "]":
-            if stk:
-                if stk.pop() != "[":
-                    flag = 0
-                    break
-            else:
-                flag = 0
-                break
+import sys
+input = sys.stdin.readline
 
-    if stk or flag == 0:
-        print("no")
-    else:
-        print("yes")
+while True:
+    string = input().rstrip()
+    if string == ".": break
+    stk = []
+    flag = True
+    for c in string:
+        if c == "(" or c == "[": stk.append(c)
+        elif c == ")" or c == "]":
+            if len(stk) == 0:
+                flag = False
+                break
+            else:
+                v = stk.pop(-1)
+                if c == ")" and v != "(":
+                    flag = False
+                    break
+                if c == "]" and v != "[":
+                    flag = False
+                    break
+    if len(stk): flag = False
+    if flag: print("yes")
+    else: print("no")
