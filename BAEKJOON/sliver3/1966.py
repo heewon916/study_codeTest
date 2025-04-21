@@ -1,35 +1,16 @@
 from collections import deque
-t = int(input())
-for i in range(t):
-    n, target = map(int, input().split()) #target이 몇 번째로 출력되는지를 알아야
-    pri = list(map(int, input().split()))
-    dic = dict()
-    for i in range(n):
-        dic[i] = pri[i]
-    # q = deque(pri)
-    q = deque(list(dic.items()))
-    mx_t = max(q, key=lambda x:x[1])
-    # idx = 0
-    count = 0
-    while q:
-        mx_i, mx_n = mx_t
-        q_i, q_n = q[0]
-        if mx_n > q_n:
-            q.append(q.popleft())
-            # idx += 1
-        elif mx_n == q_n:
-            count += 1
-            q.popleft()
-            # mx = max(q)
-            if mx_i == target:
-                print(count)
+for _ in range(int(input())):
+    N, M = map(int, input().split())
+    score_q = deque((k,v) for k, v in enumerate(list(map(int, input().split()))))
+    cnt = 0
+    while score_q:
+        max_v = max([v for k, v in score_q])
+        i, score = score_q.popleft()
+        # print("max-v = {}, ({}, {}), score_q = {} ".format(max_v, i, score, score_q))
+        if score != max_v:
+            score_q.append((i, score))
+        else:
+            cnt += 1
+            if i == M:
+                print(cnt)
                 break
-            mx_t = max(q, key=lambda x: x[1])
-        print(q)
-
-
-
-
-
-
-
