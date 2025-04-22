@@ -1,14 +1,20 @@
 N, M = map(int, input().split())
 
-arr = sorted(list(map(int, input().split())))
-l = []
-def dfs(idx):
-    if len(l) == M:
-        print(' '.join(map(str,l)))
-        return
-    for i in range(idx+1, len(arr)):
-        l.append(arr[i])
-        dfs(i)
-        l.pop()
+li = list(map(int, input().split()))
+li.sort()
 
-dfs(-1)
+visited = [0] * N # 중복 불가
+
+def generate(chosen):
+    if len(chosen) == M:
+        print(' '.join(map(str, chosen)))
+        return
+    for i in range(N):
+        if not visited[i]:
+            visited[i] = 1
+            chosen.append(li[i])
+            generate(chosen)
+            chosen.pop()
+            visited[i] = 0
+
+generate([])
