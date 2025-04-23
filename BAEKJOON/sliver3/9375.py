@@ -1,14 +1,11 @@
-tc = int(input())
-for _ in range(tc):
-    dic = dict()
-    n = int(input())
-    for _ in range(n):
-        name, type = map(str, input().split())
-        if type in dic:
-            dic[type] += 1
-        else:
-            dic[type] = 1
-    ans = 1
+for _ in range(int(input())):
+    dic = {}
+    for i in range(int(input())):
+        name, type_ = map(str, input().split())
+        if type_ not in dic:
+            dic[type_] = 1
+        else: dic[type_] += 1
+    total = 1
     for v in dic.values():
-        ans *= (1 + v)
-    print(ans-1)
+        total *= (v+1)
+    print(total - 1)
