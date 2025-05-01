@@ -1,14 +1,14 @@
-import heapq as hq
-n = int(input())
-h = []
+N = int(input())
+# 큰 수 N개만 저장하는 리스트
+nlist = []
 
-for _ in range(n):
-    tmp = list(map(int, input().split()))
-    for c in tmp:
-        if len(h) < n:
-            hq.heappush(h, c)
-        else: # 작은 숫자는 차례 차례 없애고 큰 숫자들로 채우는 거지 !!
-            hq.heappush(h, c)
-            hq.heappop(h)
-
-print(h[0])
+for i in range(N):
+    if i == 0: nlist = list(map(int, input().split()))
+    else:
+        tmp = list(map(int, input().split()))
+        for c in tmp:
+            nlist.append(c)
+    nlist.sort(reverse=True)
+    nlist = nlist[:N]
+    # print(nlist)
+print(nlist[-1])
